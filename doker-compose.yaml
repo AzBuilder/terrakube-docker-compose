@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  api-server:
+    image: api-server
+    container_name: api-server
+    environment:
+      - AzureAdAppId =
+      - AzureAdApiIdUri =
+      - ApiDataSourceType = H2
+    ports:
+      - 8080:8080
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+  api-job:
+    image: api-job
+    container_name: api-job
+    environment:
+      - AzBuilderApiUrl=http://api-server:8080
+      - AzureAdAppClientId=
+      - AzureAdAppClientSecret=
+      - AzureAdAppTenantId=
+      - AzBuilderExecutorUrl=http://executor:8090
+    ports:
+      - 8085:8085
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+  executor:
+    image: executor
+    container_name: executor
+    environment:
+      - TerraformStateType = AzureTerraformStateImpl
+      - AzureTerraformStateResourceGroup =
+      - AzureTerraformStateStorageAccountName =
+      - AzureTerraformStateStorageContainerName =
+      - AzureTerraformStateStorageAccessKey = 
+      - TerraformOutputType = AzureTerraformOutputImpl
+      - AzureTerraformOutputAccountName =
+      - AzureTerraformOutputAccountKey =
+      - AzBuilderApiUrl = http://api-server:8090/api/v1/terraform-rs
+      - AzureAdAppClientId = 
+      - AzureAdAppClientSecret = 
+      - AzureAdAppTenantId = 
+      - AzureAdAppScope =
+    ports:
+      - 8090:8090
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+networks:
+  azbuilder-backend:
+    name: azbuilder-backend
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.30.0.0/24"
+  
