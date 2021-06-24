@@ -5,7 +5,7 @@ services:
     container_name: api-server
     environment:
       - AzureAdAppId =
-      - AzureAdApiIdUri =
+      - AzureAdApiIdUri = api://azbuilder
       - ApiDataSourceType = H2
     ports:
       - 8080:8080
@@ -20,7 +20,7 @@ services:
       - AzureAdAppClientId=
       - AzureAdAppClientSecret=
       - AzureAdAppTenantId=
-      - AzBuilderExecutorUrl=http://executor:8090
+      - AzBuilderExecutorUrl=http://executor:8090/api/v1/terraform-rs
     ports:
       - 8085:8085
     networks:
@@ -38,11 +38,11 @@ services:
       - TerraformOutputType = AzureTerraformOutputImpl
       - AzureTerraformOutputAccountName =
       - AzureTerraformOutputAccountKey =
-      - AzBuilderApiUrl = http://api-server:8090/api/v1/terraform-rs
+      - AzBuilderApiUrl = http://api-server:8080
       - AzureAdAppClientId = 
       - AzureAdAppClientSecret = 
       - AzureAdAppTenantId = 
-      - AzureAdAppScope =
+      - AzureAdAppScope = api://azbuilder/Builder.Default
     ports:
       - 8090:8090
     networks:
