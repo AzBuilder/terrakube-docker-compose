@@ -1,48 +1,52 @@
 version: "3.8"
 services:
   api-server:
-    image: api-server
+    image: api-server:1.0.2
     container_name: api-server
     environment:
-      - AzureAdAppId =
-      - AzureAdApiIdUri = api://azbuilder
-      - ApiDataSourceType = H2
+      - AzureAdAppId=
+      - AzureAdApiIdUri=api://azbuilder
+      - ApiDataSourceType=H2
     ports:
       - 8080:8080
     networks:
       - azbuilder-backend
     restart: unless-stopped
   api-job:
-    image: api-job
+    image: api-job:1.0.2
     container_name: api-job
     environment:
       - AzBuilderApiUrl=http://api-server:8080
       - AzureAdAppClientId=
       - AzureAdAppClientSecret=
       - AzureAdAppTenantId=
+      - AzureAdAppScope=api://azbuilder/.default
       - AzBuilderExecutorUrl=http://executor:8090/api/v1/terraform-rs
+    depends_on:
+      - api-server
+      - executor
     ports:
       - 8085:8085
     networks:
       - azbuilder-backend
     restart: unless-stopped
   executor:
-    image: executor
+    image: executor:1.0.2
     container_name: executor
     environment:
-      - TerraformStateType = AzureTerraformStateImpl
-      - AzureTerraformStateResourceGroup =
-      - AzureTerraformStateStorageAccountName =
-      - AzureTerraformStateStorageContainerName =
-      - AzureTerraformStateStorageAccessKey = 
-      - TerraformOutputType = AzureTerraformOutputImpl
-      - AzureTerraformOutputAccountName =
-      - AzureTerraformOutputAccountKey =
-      - AzBuilderApiUrl = http://api-server:8080
-      - AzureAdAppClientId = 
-      - AzureAdAppClientSecret = 
-      - AzureAdAppTenantId = 
-      - AzureAdAppScope = api://azbuilder/Builder.Default
+      - TerraformStateType=AzureTerraformStateImpl
+      - AzureTerraformStateResourceGroup=
+      - AzureTerraformStateStorageAccountName=
+      - AzureTerraformStateStorageContainerName=tfstate
+      - AzureTerraformStateStorageAccessKey=
+      - TerraformOutputType=AzureTerraformOutputImpl
+      - AzureTerraformOutputAccountName=
+      - AzureTerraformOutputAccountKey=
+      - AzBuilderApiUrl=http://api-server:8080
+      - AzureAdAppClientId=
+      - AzureAdAppClientSecret=
+      - AzureAdAppTenantId=
+      - AzureAdAppScope=api://azbuilder/.default
     ports:
       - 8090:8090
     networks:
