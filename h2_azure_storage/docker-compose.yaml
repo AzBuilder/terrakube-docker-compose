@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   api-server:
-    image: api-server:1.0.2
+    image: azbuilder/api-server:latest
     container_name: api-server
     environment:
       - AzureAdAppId=
@@ -13,7 +13,7 @@ services:
       - azbuilder-backend
     restart: unless-stopped
   api-job:
-    image: api-job:1.0.2
+    image: azbuilder/api-job:latest
     container_name: api-job
     environment:
       - AzBuilderApiUrl=http://api-server:8080
@@ -31,7 +31,7 @@ services:
       - azbuilder-backend
     restart: unless-stopped
   executor:
-    image: executor:1.0.2
+    image: azbuilder/executor:latest
     container_name: executor
     environment:
       - TerraformStateType=AzureTerraformStateImpl

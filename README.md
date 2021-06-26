@@ -20,21 +20,7 @@ For more information visit:
 * [Configure an application to expose a web API](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
 * [Azure OAuth 2.0 Sample for Azure AD Spring Boot Starter Resource](https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-boot-samples/azure-spring-boot-sample-active-directory-resource-server#configure-web-api)
 
-### Step 2 - Build Docker Images
-In order to use this docker-compose you will need to clone and build the following repositories locally:
-
-* [https://github.com/AzBuilder/azb-server](https://github.com/AzBuilder/azb-server)
-* [https://github.com/AzBuilder/azb-pod-creator](https://github.com/AzBuilder/azb-pod-creator)
-
-Command to build the images: 
-```bash
-mvn spring-boot:build-image
-```
-
-> To compile the projects you will need to setup the access to github packages for some dependencies. To setup github packages for maven visit this [page](https://docs.github.com/en/enterprise-server@3.0/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
-
-
-### Step 3 - Create Azure Storage Account
+### Step 2 - Create Azure Storage Account
 
 Create an Azure Storage account and add the following containers with private access:
 
@@ -43,7 +29,7 @@ Create an Azure Storage account and add the following containers with private ac
 | tfoutput     | Container to store terraform output |
 | tfstate      | Container to store terraform state  |
 
-## Step 4 - Docker Compose Environment Variables
+## Step 3 - Docker Compose Environment Variables
 
 Fill environment variables for api-server inside docker-compose.yaml:
 
@@ -74,7 +60,7 @@ Fill environment variables for terraform executor inside docker-compose.yaml:
 
 > You can use one the same storage account for the terraform state and output or you can use different storage accounts
 
-## Step5 - Run AzBuilder Platform
+## Step 4 - Run AzBuilder Platform
 
 ```bash
 docker-compose up
