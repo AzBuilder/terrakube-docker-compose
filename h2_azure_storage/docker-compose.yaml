@@ -47,6 +47,8 @@ services:
       - AzureAdAppClientSecret=
       - AzureAdAppTenantId=
       - AzureAdAppScope=api://azbuilder/.default
+      - ExecutorFlagBatch=false
+      - ExecutorFlagDisableAcknowledge=false
     ports:
       - 8090:8090
     networks:
