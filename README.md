@@ -13,6 +13,9 @@ Please follow this steps:
 * Add an application role. (Example: Builder.Application.Default)
 * Add the API permission as an application permission.
 * Create an application secret.
+* Request Microsoft Graph API Permissions: 
+  * GroupMember.Read.All
+  * Group.Read.All
 
 For more information visit:
 * [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
@@ -33,9 +36,12 @@ Create an Azure Storage account and add the following containers with private ac
 
 Fill environment variables for api-server inside docker-compose.yaml:
 
-| Component       | Description                         |
-| ----------------| ------------------------------------|
-| AzureAdAppId    | Azure Application (Client Id)       |
+| Component        | Description                         |
+| -----------------| ------------------------------------|
+| AzureAdAppId     | Azure Application (Client Id)       |
+| AzGroupClientId  | Azure Application (Client Id) with Group.Read.All and roupMember.Read.All access |
+| AzGroupTenantId  | Azure Application (Tenant Id) with Group.Read.All and roupMember.Read.All access |
+| AzGroupSecret    | Azure Application (Secret Id) with Group.Read.All and roupMember.Read.All access |
 
 Fill evironment variables for api-job inside docker-compose.yaml:
 
