@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  api-server:
+    image: azbuilder/api-server:1.5.1
+    container_name: api-server
+    environment:
+      - ApiDataSourceType=H2
+      - GroupValidationType=LOCAL
+      - UserValidationType=LOCAL
+      - AuthenticationValidationType=LOCAL
+      - TerrakubeHostname=localhost:8080
+    ports:
+      - 8080:8080
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+  api-job:
+    image: azbuilder/api-job:1.5.1
+    container_name: api-job
+    environment:
+      - AzBuilderApiUrl=http://api-server:8080
+      - TerrakubeEnableSecurity=false
+      - AzBuilderExecutorUrl=http://executor:8090/api/v1/terraform-rs
+    depends_on:
+      - api-server
+      - executor
+    ports:
+      - 8085:8085
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+  executor:
+    image: azbuilder/executor:1.4.0
+    container_name: executor
+    environment:
+      - TerrakubeEnableSecurity=false
+      - TerraformStateType=LocalTerraformStateImpl
+      - TerraformOutputType=LocalTerraformOutputImpl
+      - AzBuilderApiUrl=http://api-server:8080
+      - ExecutorFlagBatch=false
+      - ExecutorFlagDisableAcknowledge=false
+      - TerrakubeToolsRepository=https://github.com/AzBuilder/terrakube-extensions.git
+      - TerrakubeToolsBranch=main
+    ports:
+      - 8090:8090
+    networks:
+      - azbuilder-backend
+    restart: unless-stopped
+networks:
+  azbuilder-backend:
+    name: azbuilder-backend
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.30.0.0/24"
