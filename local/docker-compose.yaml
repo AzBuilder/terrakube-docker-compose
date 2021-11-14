@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   api-server:
-    image: azbuilder/api-server:1.6.0
+    image: azbuilder/api-server:1.6.2
     container_name: api-server
     environment:
       - ApiDataSourceType=H2
@@ -15,7 +15,7 @@ services:
       - azbuilder-backend
     restart: unless-stopped
   api-job:
-    image: azbuilder/api-job:1.6.0
+    image: azbuilder/api-job:1.6.2
     container_name: api-job
     environment:
       - AzBuilderApiUrl=http://api-server:8080
