@@ -12,18 +12,18 @@ docker-compose up
 
 ## Step 2 - Test Terrakube Postman Collection.
 
-Now you can test Terrakube in your local environment you can follow these steps:
+Now you can test Terrakube in your local environment you can follow these steps or follow our [getting started guide](https://docs.terrakube.org/api/getting-started) for more detail information.
 
-1. Download the [postman project](https://github.com/AzBuilder/terrakube-server/tree/main/postman) 
+1. Download the [Getting Started](https://github.com/AzBuilder/terrakube-docker-compose/tree/main/getting-started) 
 2. Create an organization
 3. Create a team
 4. Create a workspace and fill all the variables or environment variables.
-5. Create a job using TCL
+5. Create a templete and run a job
 
 ## Step 3 - Test Terrakube with the CLI
 
-Work in progress the CLI needs to be updated to support terrakube server 1.5.1
+Work in progress
 
 ## Step 4 - Test Terrabkue with the UI
 
-Work in progress the UI needs to be refactor to remove Azure Active Directory dependency to run in standalone mode.
+Work in progress
