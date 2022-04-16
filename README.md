@@ -3,7 +3,7 @@
 ## Step 1 - Clone Docker Compose Repository
 
 ```bash
-git clone https://github.com/AzBuilder/azb-docker-compose.git
+git clone https://github.com/AzBuilder/terrakube-docker-compose.git
 cd local
 docker-compose up
 ```
@@ -19,11 +19,4 @@ Now you can test Terrakube in your local environment you can follow these steps 
 3. Create a team
 4. Create a workspace and fill all the variables or environment variables.
 5. Create a templete and run a job
-
-## Step 3 - Test Terrakube with the CLI
-
-Work in progress
-
-## Step 4 - Test Terrabkue with the UI
-
-Work in progress
+6. Have fun with Terrakube
