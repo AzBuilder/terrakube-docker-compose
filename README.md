@@ -4,7 +4,7 @@
 
 ```bash
 git clone https://github.com/AzBuilder/terrakube-docker-compose.git
-cd local
+cd terrakube-docker-compose/local
 docker-compose up
 ```
 
