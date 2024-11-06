@@ -4,7 +4,7 @@ resource "random_integer" "time" {
 }
 
 module "time_module" {
-  source = "../../../submodule/module1"
+  source = "../../submodule/module1"
 }
 
 output "output_time" {
